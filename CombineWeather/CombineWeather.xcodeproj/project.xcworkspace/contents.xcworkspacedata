@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Model.swift">
+   </FileRef>
+   <FileRef
+      location = "group:TempViewModel.swift">
+   </FileRef>
+   <FileRef
+      location = "group:UITextField+Publisher.swift">
+   </FileRef>
+   <FileRef
+      location = "group:ViewController.swift">
+   </FileRef>
+   <FileRef
+      location = "group:WeatherAPI.swift">
+   </FileRef>
+   <FileRef
+      location = "self:CombineWeather.xcodeproj">
+   </FileRef>
+</Workspace>
