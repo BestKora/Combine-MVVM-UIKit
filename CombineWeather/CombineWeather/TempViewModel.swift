@@ -12,7 +12,7 @@ final class TempViewModel: ObservableObject {
     // input
     @Published var city: String = "London"
     // output
-    @Published var temp = " "
+    @Published var currentWeather = WeatherDetail.placeholder
     
     init() {
         $city
@@ -21,16 +21,11 @@ final class TempViewModel: ObservableObject {
             .flatMap { (city:String) -> AnyPublisher <WeatherDetail, Never> in
                 WeatherAPI.shared.fetchWeather(for: city)
               }
-            .map { $0.main?.temp ?? 0.0 }
-            .map { "\($0) ºC" }
-            .assign(to: \.temp , on: self)
+             .assign(to: \.currentWeather , on: self)
             .store(in: &self.cancellableSet)
     }
     
     private var cancellableSet: Set<AnyCancellable> = []
 }
 
-/*
-
-*/
 

@@ -35,11 +35,48 @@ class ViewController: UIViewController{
            .assign(to: \.city, on: viewModel)
            .store(in: &cancellable)
        
-        viewModel.$temp
-           .sink(receiveValue: {[weak self] temp in
-                      self?.temperatureLabel.text = temp})
+        viewModel.$currentWeather
+           .sink(receiveValue: {[weak self] currentWeather in
+            
+            self?.temperatureLabel.text =
+                currentWeather.main?.temp != nil ?
+                "\(Int((currentWeather.main?.temp!)!)) ºC"
+                : " "}
+        )
            .store(in: &cancellable)
     }
 
      private var cancellable = Set<AnyCancellable>()
+}
+
+extension Date {
+    var dayOfTheWeek: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        return dateFormatter.string(from: self)
+    }
+    
+    var hourAndDay: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE hh a"
+        return dateFormatter.string(from: self)
+    }
+    
+    var hourOfTheDay: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH"
+        return dateFormatter.string(from: self)
+    }
+    
+    var timeOfTheDay: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.string(from: self)
+    }
+}
+
+extension DateFormatter {
+    static var shared: DateFormatter = {
+        return DateFormatter()
+    }()
 }

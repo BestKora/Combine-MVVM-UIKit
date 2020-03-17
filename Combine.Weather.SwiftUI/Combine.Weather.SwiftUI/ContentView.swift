@@ -22,8 +22,12 @@ struct ContentView: View {
                 .background(
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                 )
+                .accentColor(.blue)
             
-            Text("температура: \(model.temp)")
+            Text(
+                model.currentWeather.main?.temp != nil ?
+                    "температура: \(Int((model.currentWeather.main?.temp!)!)) ºC"
+                    : " ")
             Spacer()
         }
         .font(.title)
